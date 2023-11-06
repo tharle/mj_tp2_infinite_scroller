@@ -18,7 +18,7 @@ public class GameParameters
     public class InputNames
     {
         public const string AXIS_HORIZONTAL = "Horizontal";
-        public const string AXIS_VERTICAL = "Vertical";
+        public const string KEY_JUMP = "space";
     }
 
     public class SceneNames

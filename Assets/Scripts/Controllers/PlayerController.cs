@@ -22,9 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        float AxisVertical = Input.GetAxis(GameParameters.InputNames.AXIS_VERTICAL);
 
-        if(AxisVertical != 0)
+        if(Input.GetKeyDown(GameParameters.InputNames.KEY_JUMP))
         {
             m_Body.AddForce(m_JumpForce * Vector3.up, ForceMode2D.Impulse);
         }
@@ -33,8 +32,10 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         float AxisHorizontal = Input.GetAxis(GameParameters.InputNames.AXIS_HORIZONTAL);
-        Vector3 velocity = m_Body.velocity;
-        velocity.x = AxisHorizontal * m_Speed;
-        m_Body.velocity = velocity; 
+        Vector3 displacement  = new Vector3(AxisHorizontal * m_Speed * Time.deltaTime, 0, 0);
+        transform.Translate(displacement);
+        //Vector3 velocity = m_Body.velocity;
+        //velocity.x = AxisHorizontal * m_Speed;
+        //m_Body.velocity = velocity; 
     }
 }
