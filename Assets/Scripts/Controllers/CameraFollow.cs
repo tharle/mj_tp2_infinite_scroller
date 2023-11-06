@@ -14,9 +14,11 @@ public class CameraFollow : MonoBehaviour
         m_Offset = transform.localPosition - m_ToFollow.transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position = m_ToFollow.transform.position + m_Offset;
+        Vector3 positionToFollow = m_ToFollow.transform.position + m_Offset;
+        positionToFollow.y = transform.position.y; // block translate in y
+        positionToFollow.z = transform.position.z; // block translate in z
+        transform.position = positionToFollow;
     }
 }

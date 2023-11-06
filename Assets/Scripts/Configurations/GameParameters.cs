@@ -26,4 +26,11 @@ public class GameParameters
         public const string MAIN_MENU = "MainMenu";
         public const string GAME = "Game";
     }
+
+    public class Session
+    {
+        public const int SPRING = 0;
+        public const int SUMMER = 1;
+        public const int WINNER = 2;
+    }
 }
