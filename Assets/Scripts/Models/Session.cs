@@ -6,5 +6,6 @@ public enum Session
 {
     SPRING = 0,
     SUMMER = 1,
-    WINTER = 2
+    FALL = 2,
+    WINTER = 3
 }

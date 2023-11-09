@@ -31,11 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        float AxisHorizontal = Input.GetAxis(GameParameters.InputNames.AXIS_HORIZONTAL);
-        Vector3 displacement  = new Vector3(AxisHorizontal * m_Speed * Time.deltaTime, 0, 0);
+        Vector3 displacement  = Vector3.right * m_Speed * Time.deltaTime;
         transform.Translate(displacement);
-        //Vector3 velocity = m_Body.velocity;
-        //velocity.x = AxisHorizontal * m_Speed;
-        //m_Body.velocity = velocity; 
     }
 }

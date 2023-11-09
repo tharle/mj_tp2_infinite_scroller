@@ -5,6 +5,9 @@ using UnityEngine;
 public class LevelGenerate : MonoBehaviour
 {
     [SerializeField] private List<GameObject> m_PlatformPrefabSpring;
+    [SerializeField] private List<GameObject> m_PlatformPrefabSummer;
+    [SerializeField] private List<GameObject> m_PlatformPrefabFall;
+    [SerializeField] private List<GameObject> m_PlatformPrefabWinter;
     [SerializeField] private Transform m_StartingPlatform;
     [SerializeField] private float m_DistanceSpawn = 2;
 
@@ -33,14 +36,39 @@ public class LevelGenerate : MonoBehaviour
 
     private void CreatePlataforms()
     {
-        m_PlatformEndPoint = m_LastCreatedPlataform.Find("End");
+        m_PlatformEndPoint = m_LastCreatedPlataform.Find(GameParameters.PlataformNames.END);
         m_LastCreatedPlataform = SpawPlataform(m_PlatformEndPoint.position);
     }
 
     private Transform SpawPlataform(Vector3 spawnPosition)
     {
-        GameObject plataformBase = m_PlatformPrefabSpring[0];
+        GameObject plataformBase = GetRandomPlataform();
+        spawnPosition.x += GetOffsetWidthPlataform(plataformBase.transform);
         GameObject newPlataform = Instantiate(plataformBase, spawnPosition, Quaternion.identity);
         return newPlataform.transform;
+    }
+
+    private float GetOffsetWidthPlataform(Transform transformPlataform)
+    {
+        Transform transformPlataformEnd = transformPlataform.Find(GameParameters.PlataformNames.END);
+        return transformPlataformEnd.position.x;
+    }
+
+    private GameObject GetRandomPlataform()
+    {
+        // int randomId = Random.RandomRange(0, 0);
+        int randomId = 0;
+        switch (m_GameController.getCurrentSession())
+        {
+            case Session.SUMMER:
+                return m_PlatformPrefabSummer[randomId];
+            case Session.FALL:
+                return m_PlatformPrefabFall[randomId];
+            case Session.WINTER:
+                return m_PlatformPrefabWinter[randomId];
+            case Session.SPRING:
+            default:
+                return m_PlatformPrefabSpring[randomId];
+        }
     }
 }
