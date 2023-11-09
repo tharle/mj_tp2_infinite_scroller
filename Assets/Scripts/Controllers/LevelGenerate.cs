@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelGenerate : MonoBehaviour
 {
+    [SerializeField] private GameController m_Controller;
     [SerializeField] private List<GameObject> m_PlatformPrefabSpring;
     [SerializeField] private List<GameObject> m_PlatformPrefabSummer;
     [SerializeField] private List<GameObject> m_PlatformPrefabFall;
@@ -16,12 +17,11 @@ public class LevelGenerate : MonoBehaviour
 
 
     private Transform m_PlayerTransform;
-    private GameController m_GameController;
 
     // Start is called before the first frame update
     private void Start()
     {
-        m_GameController = FindAnyObjectByType<GameController>();
+        m_Controller = FindAnyObjectByType<GameController>();
         m_PlayerTransform = FindAnyObjectByType<PlayerController>().transform;
         m_LastCreatedPlataform = m_StartingPlatform;
     }
@@ -58,7 +58,7 @@ public class LevelGenerate : MonoBehaviour
     {
         // int randomId = Random.RandomRange(0, 0);
         int randomId = 0;
-        switch (m_GameController.getCurrentSession())
+        switch (m_Controller.getCurrentSession())
         {
             case Session.SUMMER:
                 return m_PlatformPrefabSummer[randomId];

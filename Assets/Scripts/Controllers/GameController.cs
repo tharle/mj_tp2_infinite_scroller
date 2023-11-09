@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private float m_BaseScorePerObstacle = 50;
-    [SerializeField] private float m_AmountTimeScore = 12;
+    [SerializeField] private int m_AmountTimeScore = 12;
     HUDManager m_HUDManager;
 
+    private GameState m_State = GameState.GAME;
     private float m_Score = 0;
     private float m_ElapseTimmer = 0;
     private int m_Timmer = 0;
@@ -38,14 +39,52 @@ public class GameController : MonoBehaviour
         return m_Session;
     }
 
-    public void AddScorePoints()
+    public void AddScorePoints(float score)
     {
-        float score = m_BaseScorePerObstacle * (Time.time % m_AmountTimeScore);
+        score += score * (m_Timmer / m_AmountTimeScore);
         m_Score += score;
         ShowScorePoints(score);
     }
 
     private void ShowScorePoints(float score) {
         Debug.Log("GameController - ShowScorePoints: " + score);
+    }
+
+    public void OnGameOver()
+    {
+        // TODO show game over menu
+        ChangeGameState(GameState.GAME_OVER);
+        Debug.Log("GameController: GAME OVER");
+    }
+
+    public void ChangeGameState(GameState gameState)
+    {
+        switch(gameState)
+        {
+            case GameState.MAIN_MENU:
+                PauseGame();
+                break;
+            case GameState.PAUSE_MENU:
+                PauseGame();
+                break;
+            case GameState.GAME_OVER:
+                PauseGame();
+                break;
+            case GameState.GAME:
+            default:
+                ResumeGame();
+                break;
+        }
+
+        m_State = gameState;
+    }
+
+    void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 }

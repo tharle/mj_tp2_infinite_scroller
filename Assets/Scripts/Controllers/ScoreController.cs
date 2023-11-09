@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ScoreController : MonoBehaviour
+{
+    [SerializeField] private float m_ScoreBase = 50;
+
+    private GameController m_Controller;
+
+    private void Start()
+    {
+        m_Controller = FindAnyObjectByType<GameController>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(GameParameters.TagNames.PLAYER)) {
+            m_Controller.AddScorePoints(m_ScoreBase);
+        }
+        
+    }
+}

@@ -14,17 +14,16 @@ public class GameParameters
         public const string KEY_JUMP = "space";
     }
 
-    public class PlataformNames
-    {
-        public const string START = "Start";
-        public const string END = "End";
-    }
-
     public class LayerNames
     {
         public const string PLATAFORM = "Plataform";
         public const string DESTROYER = "Destroyer";
 
+    }
+    public class PlataformNames
+    {
+        public const string START = "Start";
+        public const string END = "End";
     }
 
     public class SceneNames
@@ -33,10 +32,7 @@ public class GameParameters
         public const string GAME = "Game";
     }
 
-    public class Session
-    {
-        public const int SPRING = 0;
-        public const int SUMMER = 1;
-        public const int WINNER = 2;
+    public class TagNames {
+        public const string PLAYER = "Player";
     }
 }
