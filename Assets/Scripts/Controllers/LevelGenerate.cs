@@ -36,7 +36,7 @@ public class LevelGenerate : MonoBehaviour
 
     private void CreatePlataforms()
     {
-        m_PlatformEndPoint = m_LastCreatedPlataform.Find(GameParameters.PlataformNames.END);
+        m_PlatformEndPoint = m_LastCreatedPlataform.Find(GameParameters.PlataformName.END);
         m_LastCreatedPlataform = SpawPlataform(m_PlatformEndPoint.position);
     }
 
@@ -50,7 +50,7 @@ public class LevelGenerate : MonoBehaviour
 
     private float GetOffsetWidthPlataform(Transform transformPlataform)
     {
-        Transform transformPlataformEnd = transformPlataform.Find(GameParameters.PlataformNames.END);
+        Transform transformPlataformEnd = transformPlataform.Find(GameParameters.PlataformName.END);
         return transformPlataformEnd.position.x;
     }
 

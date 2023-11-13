@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_JumpForce = 10;
     private bool m_alive = true;
 
+    [SerializeField] private BoxCollider2D m_GroundCheck;
     private Rigidbody2D m_Body;
 
     GameController m_Controller;
+    bool m_IsGround = true;
 
 
     void Start()
@@ -29,12 +31,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag(GameParameters.TagName.GROUND))
+        {
+            m_IsGround = true;
+        }
+    }
+
     private void Jump()
     {
-
-        if(Input.GetKeyDown(GameParameters.InputNames.KEY_JUMP))
+        if(m_IsGround && Input.GetKeyDown(GameParameters.InputName.KEY_JUMP))
         {
             m_Body.AddForce(m_JumpForce * Vector3.up, ForceMode2D.Impulse);
+            m_IsGround = false;
         }
     }
 
