@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5293318842611566285}
   - component: {fileID: 3136189880898139202}
+  - component: {fileID: 105498025358985949}
   m_Layer: 0
   m_Name: SpawnEnemy
   m_TagString: Untagged
@@ -44,3 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c568386877cec9a4c9f153f64f03a059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Enemys:
+  - {fileID: 8491181516722736271, guid: 4e62c047c3d479d438023b1f8c77dca9, type: 3}
+  m_DelaySpawn: 0
+--- !u!114 &105498025358985949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6972255862946761349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887ec324fe30eb54f85663d3284f4141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ToFollow: {fileID: 0}

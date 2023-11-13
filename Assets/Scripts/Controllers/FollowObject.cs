@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class FollowObject : MonoBehaviour
 {
     [SerializeField]
     private Transform m_ToFollow;
@@ -15,6 +15,12 @@ public class CameraFollow : MonoBehaviour
     }
 
     void Update()
+    {
+
+        Follow();
+    }
+
+    private void Follow()
     {
         Vector3 positionToFollow = m_ToFollow.transform.position + m_Offset;
         positionToFollow.y = transform.position.y; // block translate in y

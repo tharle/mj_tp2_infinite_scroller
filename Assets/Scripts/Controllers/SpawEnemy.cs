@@ -4,15 +4,45 @@ using UnityEngine;
 
 public class SpawEnemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private List<EnemyController> m_Enemys;
+    [SerializeField] private Vector2 m_DelaySpawnRange = new Vector2(1, 3);
+    private float m_ElapseTime = 0;
+    private float m_DelaySpawn = 1;
+
+    private void Start()
     {
-        
+        RandomiseDelaySpawn();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        m_ElapseTime += Time.deltaTime;
+
+        if (m_ElapseTime >= m_DelaySpawn)
+        {
+            m_ElapseTime -= m_DelaySpawn;
+            SpawnEnemy();
+            RandomiseDelaySpawn();
+        }
+    }
+
+    private void RandomiseDelaySpawn() {
+        m_DelaySpawn = Random.Range(m_DelaySpawnRange.x, m_DelaySpawnRange.y);
+    }
+
+
+    private void SpawnEnemy()
+    {
+       EnemyController plataformBase = GetRandomEnemy();
+       Instantiate(plataformBase, transform.position, Quaternion.identity);
+    }
+
+    private EnemyController GetRandomEnemy()
+    {
+        // int randomId = Random.RandomRange(0, 0);
+        int randomId = 0;
+
+        return m_Enemys[randomId];
+
     }
 }
