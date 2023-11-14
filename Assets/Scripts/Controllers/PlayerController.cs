@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     GameController m_Controller;
     bool m_IsGround = true;
+    bool m_IsDoubleJump = true;
 
 
     void Start()
@@ -41,11 +42,33 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if(m_IsGround && Input.GetKeyDown(GameParameters.InputName.KEY_JUMP))
+        if (!m_IsGround && !m_IsDoubleJump) return;
+
+        if (Input.GetKeyDown(GameParameters.InputName.KEY_JUMP))
         {
+
+            ResetVelocityJump();
             m_Body.AddForce(m_JumpForce * Vector3.up, ForceMode2D.Impulse);
-            m_IsGround = false;
+
+            if(m_IsGround)
+            {
+                m_IsDoubleJump = true;
+                m_IsGround = false;
+            }
+            else if(m_IsDoubleJump)
+            {
+                m_IsDoubleJump = false;
+            }
+
+
         }
+    }
+
+    private void ResetVelocityJump()
+    {
+        Vector3 velocity = m_Body.velocity;
+        velocity.y = 0;
+        m_Body.velocity = velocity;
     }
 
     private void Move()
