@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreController : MonoBehaviour
 {
-    [SerializeField] private float m_ScoreBase = 50;
+    [SerializeField] private int m_ScoreBase = 50;
 
     private GameController m_Controller;
 

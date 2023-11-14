@@ -9,14 +9,19 @@ public class GameController : MonoBehaviour
     HUDManager m_HUDManager;
 
     private GameState m_State = GameState.GAME;
-    private float m_Score = 0;
-    private float m_ElapseTimmer = 0;
-    private int m_Timmer = 0;
     private Session m_Session = Session.SPRING;
+
+    private int m_Score = 0;
+    private int m_Hiscore = 99999;
+    private int m_Life = 3;
+    private int m_Timmer = 0;
+    private float m_ElapseTimmer = 0;
 
     private void Start()
     {
         m_HUDManager = FindAnyObjectByType<HUDManager>();
+        UpdateScore();
+        UpdateLife();
     }
 
     private void Update()
@@ -24,29 +29,21 @@ public class GameController : MonoBehaviour
         UpdateTimmer();
     }
 
-    private void UpdateTimmer()
-    {
-        m_ElapseTimmer += Time.deltaTime;
-        if(m_ElapseTimmer > 1) // change le timmer chaque 1s
-        {
-            m_ElapseTimmer -= 1;
-            m_HUDManager.UpdateTimmer(++m_Timmer);
-        }
-    }
-
     public Session getCurrentSession()
     {
         return m_Session;
     }
 
-    public void AddScorePoints(float score)
+    public void AddScorePoints(int score)
     {
         score += score * (m_Timmer / m_AmountTimeScore);
         m_Score += score;
         ShowScorePoints(score);
+        UpdateScore();
     }
 
-    private void ShowScorePoints(float score) {
+    private void ShowScorePoints(int score) {
+        // TODO afficher le texte dans le écran, dans le moment de la collition
         Debug.Log("GameController - ShowScorePoints: " + score);
     }
 
@@ -86,5 +83,29 @@ public class GameController : MonoBehaviour
     void ResumeGame()
     {
         Time.timeScale = 1;
+    }
+
+
+    // ---------------------------------------------
+    // HUD UPDATES
+    // ---------------------------------------------
+    private void UpdateTimmer()
+    {
+        m_ElapseTimmer += Time.deltaTime;
+        if (m_ElapseTimmer > 1) // change le timmer chaque 1s
+        {
+            m_ElapseTimmer -= 1;
+            m_HUDManager.UpdateTimmer(++m_Timmer);
+        }
+    }
+
+    private void UpdateScore()
+    {
+        m_HUDManager.UpdateScore(m_Score);
+    }
+
+    private void UpdateLife()
+    {
+        m_HUDManager.UpdateLife(m_Life);
     }
 }

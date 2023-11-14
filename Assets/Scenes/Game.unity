@@ -457,7 +457,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TxtMPTime: {fileID: 392081436}
-  m_TxtMPScore: {fileID: 0}
+  m_TxtMPScore: {fileID: 592523927}
+  m_TxtMPLife: {fileID: 579694544}
 --- !u!1 &355437269
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,8 +509,6 @@ MonoBehaviour:
   m_Speed: 1
   m_JumpForce: 3
   m_GroundCheck: {fileID: 0}
-  m_IsGround: 1
-  m_IsDoubleJump: 1
 --- !u!50 &355437272
 Rigidbody2D:
   serializedVersion: 4
