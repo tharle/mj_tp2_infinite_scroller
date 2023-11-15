@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if (player != null)
         {
-            player.Die();
+            player.LossLife();
         }
     }
 }

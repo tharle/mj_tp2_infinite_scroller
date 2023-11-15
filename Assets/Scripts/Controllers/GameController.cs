@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -10,18 +12,18 @@ public class GameController : MonoBehaviour
 
     private Session m_Session = Session.SPRING;
 
-    private int m_Level = 1;
     private int m_Score = 0;
-    private int m_Hiscore = 1000;
-    private int m_Life = 3;
+    private int m_HiScore = 0;
     private int m_Timmer = 0;
     private float m_ElapseTimmer = 0;
 
     private void Start()
     {
         m_HUDManager = FindAnyObjectByType<HUDManager>();
-        UpdateScore();
-        UpdateLife();
+        UpdateScores();
+
+        ChangeGameState(GameState.GAME);
+        LoadPlayerPrefs();
     }
 
     private void Update()
@@ -44,19 +46,20 @@ public class GameController : MonoBehaviour
         score += score * GetLevel();
         m_Score += score;
         ShowScorePoints(score);
-        UpdateScore();
+
+        m_HiScore = m_Score >= m_HiScore ? m_Score : m_HiScore;
+
+        UpdateScores();
     }
 
     private void ShowScorePoints(int score) {
-        // TODO afficher le texte dans le écran, dans le moment de la collition
         Debug.Log("GameController - ShowScorePoints: " + score);
     }
 
-    public void OnGameOver()
+    public void LossLife()
     {
-        // TODO show game over menu
         ChangeGameState(GameState.GAME_OVER);
-        Debug.Log("GameController: GAME OVER");
+        SavePlayerPrefs();
     }
 
 
@@ -79,13 +82,19 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void UpdateScore()
+    private void UpdateScores()
     {
-        m_HUDManager.UpdateScore(m_Score);
+        m_HUDManager.UpdateScores(m_Score, m_HiScore);
     }
 
-    private void UpdateLife()
+    private void SavePlayerPrefs()
     {
-        m_HUDManager.UpdateLife(m_Life);
+        PlayerPrefs.SetInt("HiScore", m_Score);
+        PlayerPrefs.Save();
     }
+
+    private void LoadPlayerPrefs() {
+        m_Score = PlayerPrefs.GetInt("HiScore", 0);
+    }
+
 }

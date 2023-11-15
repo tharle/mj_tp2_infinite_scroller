@@ -77,9 +77,10 @@ public class PlayerController : MonoBehaviour
         transform.Translate(displacement);
     }
 
-    internal void Die()
+    public void LossLife()
     {
         // TODO add animation die
-        m_Controller.OnGameOver();
+        m_alive = false;
+        m_Controller.LossLife();
     }
 }
