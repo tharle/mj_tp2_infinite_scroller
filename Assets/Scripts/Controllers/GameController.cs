@@ -8,7 +8,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private int m_AmountTimeScore = 12;
     HUDManager m_HUDManager;
 
-    private GameState m_State = GameState.GAME;
     private Session m_Session = Session.SPRING;
 
     private int m_Level = 1;
@@ -60,41 +59,16 @@ public class GameController : MonoBehaviour
         Debug.Log("GameController: GAME OVER");
     }
 
-    public void ChangeGameState(GameState gameState)
-    {
-        switch(gameState)
-        {
-            case GameState.MAIN_MENU:
-                PauseGame();
-                break;
-            case GameState.PAUSE_MENU:
-                PauseGame();
-                break;
-            case GameState.GAME_OVER:
-                PauseGame();
-                break;
-            case GameState.GAME:
-            default:
-                ResumeGame();
-                break;
-        }
-
-        m_State = gameState;
-    }
-
-    void PauseGame()
-    {
-        Time.timeScale = 0;
-    }
-    void ResumeGame()
-    {
-        Time.timeScale = 1;
-    }
-
 
     // ---------------------------------------------
     // HUD UPDATES
     // ---------------------------------------------
+
+    public void ChangeGameState(GameState gameState)
+    {
+        m_HUDManager.ChangeGameState(gameState);
+    }
+
     private void UpdateTimmer()
     {
         m_ElapseTimmer += Time.deltaTime;
