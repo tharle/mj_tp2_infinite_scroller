@@ -2123,7 +2123,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_102
+      name: grass_detail_0
       rect:
         serializedVersion: 2
         x: 32
@@ -2144,7 +2144,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_103
+      name: grass_detail_1
       rect:
         serializedVersion: 2
         x: 48
@@ -2186,7 +2186,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_105
+      name: grass_detail_2
       rect:
         serializedVersion: 2
         x: 80
@@ -2543,7 +2543,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_124
+      name: grass_detail_3
       rect:
         serializedVersion: 2
         x: 64
@@ -2627,7 +2627,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_128
+      name: grass_detail_4
       rect:
         serializedVersion: 2
         x: 128
@@ -2669,7 +2669,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_130
+      name: grass_detail_7
       rect:
         serializedVersion: 2
         x: 160
@@ -2711,7 +2711,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_132
+      name: grass_detail_5
       rect:
         serializedVersion: 2
         x: 192
@@ -2753,7 +2753,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_134
+      name: grass_detail_6
       rect:
         serializedVersion: 2
         x: 224
@@ -12539,7 +12539,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_786
+      name: item_0
       rect:
         serializedVersion: 2
         x: 96
@@ -12560,7 +12560,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_787
+      name: item_1
       rect:
         serializedVersion: 2
         x: 112
@@ -12581,7 +12581,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_789
+      name: item_2
       rect:
         serializedVersion: 2
         x: 144
@@ -12602,7 +12602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Retro-Lines-Tiles_790
+      name: item_3
       rect:
         serializedVersion: 2
         x: 160
@@ -13098,10 +13098,7 @@ TextureImporter:
       Retro-Lines-Tiles_10: 1813030924
       Retro-Lines-Tiles_100: 1074890580
       Retro-Lines-Tiles_101: -401827857
-      Retro-Lines-Tiles_102: 2123063645
-      Retro-Lines-Tiles_103: 338282020
       Retro-Lines-Tiles_104: -1710852995
-      Retro-Lines-Tiles_105: 1942560856
       Retro-Lines-Tiles_106: 1418642227
       Retro-Lines-Tiles_107: 1285107513
       Retro-Lines-Tiles_108: -1258930425
@@ -13122,18 +13119,13 @@ TextureImporter:
       Retro-Lines-Tiles_121: 884220745
       Retro-Lines-Tiles_122: 2062487314
       Retro-Lines-Tiles_123: -998025174
-      Retro-Lines-Tiles_124: -2004682482
       Retro-Lines-Tiles_125: -1449383240
       Retro-Lines-Tiles_126: -979901940
       Retro-Lines-Tiles_127: -1090896407
-      Retro-Lines-Tiles_128: 197485875
       Retro-Lines-Tiles_129: 2000507077
       Retro-Lines-Tiles_13: 265059001
-      Retro-Lines-Tiles_130: -986449806
       Retro-Lines-Tiles_131: -1031482805
-      Retro-Lines-Tiles_132: -2081327229
       Retro-Lines-Tiles_133: -1240845058
-      Retro-Lines-Tiles_134: -1840608056
       Retro-Lines-Tiles_135: 2050200389
       Retro-Lines-Tiles_136: 1523669175
       Retro-Lines-Tiles_137: -1053747513
@@ -13847,12 +13839,8 @@ TextureImporter:
       Retro-Lines-Tiles_783: 1738840428
       Retro-Lines-Tiles_784: 613763673
       Retro-Lines-Tiles_785: 536921915
-      Retro-Lines-Tiles_786: -15771433
-      Retro-Lines-Tiles_787: -448484215
       Retro-Lines-Tiles_788: -1169524586
-      Retro-Lines-Tiles_789: -1257218367
       Retro-Lines-Tiles_79: -1072904982
-      Retro-Lines-Tiles_790: -1647110593
       Retro-Lines-Tiles_791: -2047039439
       Retro-Lines-Tiles_792: 378816246
       Retro-Lines-Tiles_793: 702833013
@@ -13935,6 +13923,18 @@ TextureImporter:
       grass_7: -1839464711
       grass_8: 645200300
       grass_9: 355770330
+      grass_detail_0: 2123063645
+      grass_detail_1: 338282020
+      grass_detail_2: 1942560856
+      grass_detail_3: -2004682482
+      grass_detail_4: 197485875
+      grass_detail_5: -2081327229
+      grass_detail_6: -1840608056
+      grass_detail_7: -986449806
+      item_0: -15771433
+      item_1: -448484215
+      item_2: -1257218367
+      item_3: -1647110593
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

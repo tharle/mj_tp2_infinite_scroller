@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawEnemy : MonoBehaviour
+public class SpawnGameObject : MonoBehaviour
 {
-    [SerializeField] private List<EnemyController> m_Enemys;
+    [SerializeField] private List<GameObject> m_GameObjects;
     [SerializeField] private Vector2 m_DelaySpawnRange = new Vector2(1, 3);
     private float m_ElapseTime = 0;
     private float m_DelaySpawn = 1;
@@ -21,7 +21,7 @@ public class SpawEnemy : MonoBehaviour
         if (m_ElapseTime >= m_DelaySpawn)
         {
             m_ElapseTime -= m_DelaySpawn;
-            SpawnEnemy();
+            DoSpawn();
             RandomiseDelaySpawn();
         }
     }
@@ -31,18 +31,18 @@ public class SpawEnemy : MonoBehaviour
     }
 
 
-    private void SpawnEnemy()
+    private void DoSpawn()
     {
-       EnemyController plataformBase = GetRandomEnemy();
+        GameObject plataformBase = GetRandomEnemy();
        Instantiate(plataformBase, transform.position, Quaternion.identity);
     }
 
-    private EnemyController GetRandomEnemy()
+    private GameObject GetRandomEnemy()
     {
         // int randomId = Random.RandomRange(0, 0);
         int randomId = 0;
 
-        return m_Enemys[randomId];
+        return m_GameObjects[randomId];
 
     }
 }

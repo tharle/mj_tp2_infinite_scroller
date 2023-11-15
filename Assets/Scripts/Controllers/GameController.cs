@@ -11,8 +11,9 @@ public class GameController : MonoBehaviour
     private GameState m_State = GameState.GAME;
     private Session m_Session = Session.SPRING;
 
+    private int m_Level = 1;
     private int m_Score = 0;
-    private int m_Hiscore = 99999;
+    private int m_Hiscore = 1000;
     private int m_Life = 3;
     private int m_Timmer = 0;
     private float m_ElapseTimmer = 0;
@@ -29,6 +30,11 @@ public class GameController : MonoBehaviour
         UpdateTimmer();
     }
 
+    public int GetLevel()
+    {
+        return m_Timmer / m_AmountTimeScore;
+    }
+
     public Session getCurrentSession()
     {
         return m_Session;
@@ -36,7 +42,7 @@ public class GameController : MonoBehaviour
 
     public void AddScorePoints(int score)
     {
-        score += score * (m_Timmer / m_AmountTimeScore);
+        score += score * GetLevel();
         m_Score += score;
         ShowScorePoints(score);
         UpdateScore();
