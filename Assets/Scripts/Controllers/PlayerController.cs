@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
     public void LossLife()
     {
         // TODO add animation die
+        // TODO Jouer music game over
         m_alive = false;
         m_Controller.LossLife();
     }

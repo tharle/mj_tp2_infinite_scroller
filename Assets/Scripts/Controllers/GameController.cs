@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -58,20 +57,35 @@ public class GameController : MonoBehaviour
 
     public void LossLife()
     {
-        ChangeGameState(GameState.GAME_OVER);
         SavePlayerPrefs();
+        ChangeGameState(GameState.GAME_OVER);
     }
 
+    private void SavePlayerPrefs()
+    {
+        PlayerPrefs.SetInt("HiScore", m_Score);
+        PlayerPrefs.Save();
+    }
 
-    // ---------------------------------------------
-    // HUD UPDATES
-    // ---------------------------------------------
+    private void LoadPlayerPrefs()
+    {
+        m_Score = PlayerPrefs.GetInt("HiScore", 0);
+    } 
 
     public void ChangeGameState(GameState gameState)
     {
         m_HUDManager.ChangeGameState(gameState);
     }
 
+    public void OnTryAgain()
+    {
+
+    }
+
+
+    // ---------------------------------------------
+    // HUD UPDATES
+    // ---------------------------------------------
     private void UpdateTimmer()
     {
         m_ElapseTimmer += Time.deltaTime;
@@ -85,16 +99,6 @@ public class GameController : MonoBehaviour
     private void UpdateScores()
     {
         m_HUDManager.UpdateScores(m_Score, m_HiScore);
-    }
-
-    private void SavePlayerPrefs()
-    {
-        PlayerPrefs.SetInt("HiScore", m_Score);
-        PlayerPrefs.Save();
-    }
-
-    private void LoadPlayerPrefs() {
-        m_Score = PlayerPrefs.GetInt("HiScore", 0);
     }
 
 }
