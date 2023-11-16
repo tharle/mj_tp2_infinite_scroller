@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,11 +10,13 @@ public class PlayerController : MonoBehaviour
     private bool m_alive = true;
 
     [SerializeField] private BoxCollider2D m_GroundCheck;
+    [SerializeField] private Animator m_Animator;
     private Rigidbody2D m_Body;
 
     GameController m_Controller;
     bool m_IsGround = true;
     bool m_IsDoubleJump = true;
+
 
 
     void Start()
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.CompareTag(GameParameters.TagName.GROUND))
         {
             m_IsGround = true;
+            m_Animator.SetBool(GameParameters.AnimationPlayer.BOOL_DOUBLE_JUMP, false);
         }
     }
 
@@ -58,10 +62,13 @@ public class PlayerController : MonoBehaviour
             else if(m_IsDoubleJump)
             {
                 m_IsDoubleJump = false;
+                m_Animator.SetBool(GameParameters.AnimationPlayer.BOOL_DOUBLE_JUMP, true);
             }
 
 
         }
+
+        m_Animator.SetFloat(GameParameters.AnimationPlayer.FLOAT_VELOCITY_Y, m_Body.velocity.y);
     }
 
     private void ResetVelocityJump()
@@ -81,9 +88,15 @@ public class PlayerController : MonoBehaviour
 
     public void LossLife()
     {
-        // TODO add animation die
+        m_Animator.SetTrigger(GameParameters.AnimationPlayer.TRIGGER_DIE);
         // TODO Jouer music game over
         m_alive = false;
+        StartCoroutine(DoDie());
+    }
+
+    IEnumerator DoDie()
+    {
+        yield return new WaitForSeconds(1f);
         m_Controller.LossLife();
     }
 }

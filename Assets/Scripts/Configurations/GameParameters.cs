@@ -7,6 +7,9 @@ public class GameParameters
 {
     public class AnimationPlayer
     {
+        public const string FLOAT_VELOCITY_Y = "velocity_y";
+        public const string BOOL_DOUBLE_JUMP = "double_jump";
+        public const string TRIGGER_DIE = "die";
     }
 
     public class InputName
