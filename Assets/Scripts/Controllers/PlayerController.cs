@@ -73,7 +73,9 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        Vector3 displacement  = Vector3.right * m_Speed * Time.deltaTime;
+
+        float speed = m_Speed * m_Controller.GetLevel() / 2;
+        Vector3 displacement  = Vector3.right * speed * Time.deltaTime ;
         transform.Translate(displacement);
     }
 

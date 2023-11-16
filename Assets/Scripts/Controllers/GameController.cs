@@ -20,10 +20,10 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         m_HUDManager = FindAnyObjectByType<HUDManager>();
+        LoadPlayerPrefs();
         UpdateScores();
 
         ChangeGameState(GameState.GAME);
-        LoadPlayerPrefs();
     }
 
     private void Update()
@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
 
     public int GetLevel()
     {
-        return m_Timmer / m_AmountTimeScore;
+        return (m_Timmer / m_AmountTimeScore) + 1;
     }
 
     public Session getCurrentSession()
@@ -64,13 +64,13 @@ public class GameController : MonoBehaviour
 
     private void SavePlayerPrefs()
     {
-        PlayerPrefs.SetInt("HiScore", m_Score);
+        PlayerPrefs.SetInt("HiScore", m_HiScore);
         PlayerPrefs.Save();
     }
 
     private void LoadPlayerPrefs()
     {
-        m_Score = PlayerPrefs.GetInt("HiScore", 0);
+        m_HiScore = PlayerPrefs.GetInt("HiScore");
     } 
 
     public void ChangeGameState(GameState gameState)
