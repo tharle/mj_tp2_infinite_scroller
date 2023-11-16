@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -77,11 +78,6 @@ public class GameController : MonoBehaviour
         m_HUDManager.ChangeGameState(gameState);
     }
 
-    public void OnTryAgain()
-    {
-
-    }
-
 
     // ---------------------------------------------
     // HUD UPDATES
@@ -99,6 +95,19 @@ public class GameController : MonoBehaviour
     private void UpdateScores()
     {
         m_HUDManager.UpdateScores(m_Score, m_HiScore);
+    }
+
+    // ---------------------------------------------
+    // HUD UPDATES
+    // ---------------------------------------------
+    public void OnTryAgain()
+    {
+        SceneManager.LoadScene(GameParameters.SceneName.GAME);
+    }
+
+    public void OnMainMenu()
+    {
+        SceneManager.LoadScene(GameParameters.SceneName.MAIN_MENU);
     }
 
 }
