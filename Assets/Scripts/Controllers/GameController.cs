@@ -15,11 +15,14 @@ public class GameController : MonoBehaviour
     private int m_Score = 0;
     private int m_HiScore = 0;
     private int m_Timmer = 0;
+    private float m_AmountTimmerToNextSession = 0;
+    private float m_TimmerToNextSession = 0;
     private float m_ElapseTimmer = 0;
 
     private void Start()
     {
         m_HUDManager = FindAnyObjectByType<HUDManager>();
+        m_AmountTimmerToNextSession = m_AmountTimeScore * 2;
         LoadPlayerPrefs();
         UpdateScores();
 
@@ -29,6 +32,38 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         UpdateTimmer();
+
+        UpdateSession();
+    }
+
+    private void UpdateSession()
+    {
+        m_TimmerToNextSession += Time.deltaTime;
+        if (m_TimmerToNextSession >= m_AmountTimmerToNextSession)
+        {
+            m_TimmerToNextSession -= m_AmountTimmerToNextSession;
+            ChangeToNextSession();
+        }
+    }
+
+    private void ChangeToNextSession()
+    {
+        switch (m_Session)
+        {
+            case Session.SUMMER:
+                m_Session = Session.FALL;
+                break;
+            case Session.FALL:
+                m_Session = Session.WINTER;
+                break;
+            case Session.WINTER:
+                m_Session = Session.SPRING;
+                break;
+            case Session.SPRING:
+            default:
+                m_Session = Session.SUMMER;
+                break;
+        }
     }
 
     public int GetLevel()

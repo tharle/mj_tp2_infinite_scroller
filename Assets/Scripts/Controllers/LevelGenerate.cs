@@ -56,18 +56,21 @@ public class LevelGenerate : MonoBehaviour
 
     private GameObject GetRandomPlataform()
     {
-        // int randomId = Random.RandomRange(0, 0);
-        int randomId = 0;
+        
         switch (m_Controller.getCurrentSession())
         {
             case Session.SUMMER:
+                int randomId = Random.Range(0, m_PlatformPrefabSummer.Count);
                 return m_PlatformPrefabSummer[randomId];
             case Session.FALL:
+                randomId = Random.Range(0, m_PlatformPrefabFall.Count);
                 return m_PlatformPrefabFall[randomId];
             case Session.WINTER:
+                randomId = Random.Range(0, m_PlatformPrefabWinter.Count);
                 return m_PlatformPrefabWinter[randomId];
             case Session.SPRING:
             default:
+                randomId = Random.Range(0, m_PlatformPrefabSpring.Count);
                 return m_PlatformPrefabSpring[randomId];
         }
     }

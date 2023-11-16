@@ -272,7 +272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &72797516
 RectTransform:
   m_ObjectHideFlags: 0
@@ -836,7 +836,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 60}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &392081436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1492,7 +1492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &531240553
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1507,10 +1507,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 72797516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.055603, y: 1.0278015}
-  m_SizeDelta: {x: 32.8896, y: 26.7228}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 500, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &531240554
 MonoBehaviour:
@@ -3187,9 +3187,20 @@ MonoBehaviour:
   m_Controller: {fileID: 0}
   m_PlatformPrefabSpring:
   - {fileID: 4112174327399160918, guid: 3d7f317fe6c1810489d4dba7010cf64a, type: 3}
-  m_PlatformPrefabSummer: []
-  m_PlatformPrefabFall: []
-  m_PlatformPrefabWinter: []
+  - {fileID: 4112174327399160918, guid: ba7293b40f71334428cc7daebc94368c, type: 3}
+  - {fileID: 4112174327399160918, guid: 745785f46a91a7c42b1b133a318816dc, type: 3}
+  m_PlatformPrefabSummer:
+  - {fileID: 4112174327399160918, guid: a5a745d72d76ec04283dd3c6eba7c576, type: 3}
+  - {fileID: 4112174327399160918, guid: ed013fb619d245a46bee5a14da3f6b9e, type: 3}
+  - {fileID: 4112174327399160918, guid: 09292394e038877449b878d98ebf833c, type: 3}
+  m_PlatformPrefabFall:
+  - {fileID: 4112174327399160918, guid: edcff748177d2944381cc0d4b8e03da0, type: 3}
+  - {fileID: 4112174327399160918, guid: 0d774e48ac3de2d40b15cf4d1f34b39a, type: 3}
+  - {fileID: 4112174327399160918, guid: 8cfbe5a5acf4b0744919a0e6fb367010, type: 3}
+  m_PlatformPrefabWinter:
+  - {fileID: 4112174327399160918, guid: c52edab4ad81e4e42986ce7c95174892, type: 3}
+  - {fileID: 4112174327399160918, guid: f4d1579303aa83842a604c90bd32f430, type: 3}
+  - {fileID: 4112174327399160918, guid: 79b3060e78a64b04483fe7be8753174e, type: 3}
   m_StartingPlatform: {fileID: 5282032487299055127, guid: 3d7f317fe6c1810489d4dba7010cf64a, type: 3}
   m_DistanceSpawn: 2
 --- !u!4 &1934670047
@@ -3300,22 +3311,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 175916593294749209, guid: 3d7f317fe6c1810489d4dba7010cf64a, type: 3}
-      propertyPath: m_TileAnchor.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 801567672688757059, guid: 3d7f317fe6c1810489d4dba7010cf64a, type: 3}
-      propertyPath: m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 801567672688757059, guid: 3d7f317fe6c1810489d4dba7010cf64a, type: 3}
-      propertyPath: m_SortOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3813413550201229337, guid: 3d7f317fe6c1810489d4dba7010cf64a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4112174327399160918, guid: 3d7f317fe6c1810489d4dba7010cf64a, type: 3}
       propertyPath: m_Name
       value: StartingPlataform
