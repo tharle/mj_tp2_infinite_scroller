@@ -44,8 +44,7 @@ public class SpawnGameObject : MonoBehaviour
 
     private GameObject GetRandomEnemy()
     {
-        // int randomId = Random.RandomRange(0, 0);
-        int randomId = 0;
+        int randomId = Random.Range(0, m_GameObjects.Count);
 
         return m_GameObjects[randomId];
 
