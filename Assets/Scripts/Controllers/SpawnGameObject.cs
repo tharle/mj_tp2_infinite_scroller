@@ -9,8 +9,11 @@ public class SpawnGameObject : MonoBehaviour
     private float m_ElapseTime = 0;
     private float m_DelaySpawn = 1;
 
+    private GameController m_Controller;
+
     private void Start()
     {
+        m_Controller = FindAnyObjectByType<GameController>();
         RandomiseDelaySpawn();
     }
 
@@ -27,7 +30,9 @@ public class SpawnGameObject : MonoBehaviour
     }
 
     private void RandomiseDelaySpawn() {
-        m_DelaySpawn = Random.Range(m_DelaySpawnRange.x, m_DelaySpawnRange.y);
+        float delayMin = m_DelaySpawnRange.x / m_Controller.GetLevel();
+        float delayMax = m_DelaySpawnRange.y / m_Controller.GetLevel();
+        m_DelaySpawn = Random.Range(delayMin, delayMax);
     }
 
 
