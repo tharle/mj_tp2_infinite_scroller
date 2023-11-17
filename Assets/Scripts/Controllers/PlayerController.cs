@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     bool m_IsGround = true;
     bool m_IsDoubleJump = true;
 
+    [SerializeField] AudioSource m_AudioDeath;
+    [SerializeField] AudioSource m_AudioJump;
+
 
 
     void Start()
@@ -53,8 +56,9 @@ public class PlayerController : MonoBehaviour
 
             ResetVelocityJump();
             m_Body.AddForce(m_JumpForce * Vector3.up, ForceMode2D.Impulse);
+            m_AudioJump.Play(); 
 
-            if(m_IsGround)
+            if (m_IsGround)
             {
                 m_IsDoubleJump = true;
                 m_IsGround = false;
@@ -92,6 +96,7 @@ public class PlayerController : MonoBehaviour
         // TODO Jouer music game over
         m_alive = false;
         StartCoroutine(DoDie());
+        m_AudioDeath.Play();
     }
 
     IEnumerator DoDie()

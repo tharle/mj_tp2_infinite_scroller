@@ -1,9 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] private int m_AmountTimeScore = 12;
+    [SerializeField] private TextScore m_ScorePlayerText;
+    [SerializeField] AudioSource m_CoinAudio;
     HUDManager m_HUDManager;
 
     private Session m_Session = Session.SPRING;
@@ -72,19 +75,19 @@ public class GameController : MonoBehaviour
         return m_Session;
     }
 
-    public void AddScorePoints(int score)
+    public void AddScorePoints(int score, bool isCoin)
     {
         score += score * GetLevel();
         m_Score += score;
         ShowScorePoints(score);
-
+        if(isCoin) m_CoinAudio.Play();
         m_HiScore = m_Score >= m_HiScore ? m_Score : m_HiScore;
 
         UpdateScores();
     }
 
     private void ShowScorePoints(int score) {
-        Debug.Log("GameController - ShowScorePoints: " + score);
+        m_ScorePlayerText.playText(score.ToString());
     }
 
     public void LossLife()

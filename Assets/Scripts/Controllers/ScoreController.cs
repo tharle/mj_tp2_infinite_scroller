@@ -16,7 +16,7 @@ public class ScoreController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag(GameParameters.TagName.PLAYER)) {
-            m_Controller.AddScorePoints(m_ScoreBase);
+            m_Controller.AddScorePoints(m_ScoreBase, false);
         }
         
     }

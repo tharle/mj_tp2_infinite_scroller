@@ -6,6 +6,7 @@ public class CoinController : MonoBehaviour
 {
     [SerializeField] int m_Value = 15;
     GameController m_Controller;
+    
     private void Start()
     {
         m_Controller = FindAnyObjectByType<GameController>();
@@ -15,8 +16,8 @@ public class CoinController : MonoBehaviour
     {
         if (collision.CompareTag(GameParameters.TagName.PLAYER))
         {
-            m_Controller.AddScorePoints(m_Value);
-
+            m_Controller.AddScorePoints(m_Value, true);
+            
             Destroy(gameObject);
         }
     }
