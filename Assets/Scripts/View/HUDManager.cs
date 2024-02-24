@@ -12,6 +12,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_TxtMPHiScoreGameOver;
 
     [SerializeField] private GameObject m_GameOverScreen;
+    [SerializeField] private GameObject m_PauseMenuScreen;
 
     private void Start()
     {
@@ -46,7 +47,7 @@ public class HUDManager : MonoBehaviour
                 PauseGame();
                 break;
             case GameState.PAUSE_MENU:
-                PauseGame();
+                ShowPauseMenuScreen();
                 break;
             case GameState.GAME_OVER:
                 ShowGameOverScreen();
@@ -64,13 +65,22 @@ public class HUDManager : MonoBehaviour
         m_GameOverScreen.SetActive(true);
     }
 
-    void PauseGame()
+    private void ShowPauseMenuScreen()
+    {
+        PauseGame();
+        m_PauseMenuScreen.SetActive(true);
+    }
+
+
+    private void PauseGame()
     {
         Time.timeScale = 0;
     }
 
-    void ResumeGame()
+    private void ResumeGame()
     {
+        m_PauseMenuScreen.SetActive(false);
+        m_GameOverScreen.SetActive(false);
         Time.timeScale = 1;
     }
 }

@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     private float m_TimmerToNextSession = 0;
     private float m_ElapseTimmer = 0;
 
+
     private void Start()
     {
         m_HUDManager = FindAnyObjectByType<HUDManager>();
@@ -33,6 +34,8 @@ public class GameController : MonoBehaviour
         UpdateTimmer();
 
         UpdateSession();
+
+        UpdatePauseMenu();
     }
 
     private void UpdateSession()
@@ -142,6 +145,20 @@ public class GameController : MonoBehaviour
     public void OnMainMenu()
     {
         SceneManager.LoadScene(GameParameters.SceneName.MAIN_MENU);
+    }
+
+    private void UpdatePauseMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnContinuePauseMenu();
+        }
+    }
+
+    public void OnContinuePauseMenu()
+    {
+        if (Time.timeScale == 0) ChangeGameState(GameState.GAME);
+        else ChangeGameState(GameState.PAUSE_MENU);
     }
 
 }
