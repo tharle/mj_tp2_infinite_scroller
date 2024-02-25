@@ -190,42 +190,36 @@ public class GameController : MonoBehaviour
     {
         CheatManager.Instance.SubscribeEvent(ECheat.ADD_SCORE, OnCheatAddScorePoints);
         CheatManager.Instance.SubscribeEvent(ECheat.ADD_TIME, OnCheatAddTime);
-        CheatManager.Instance.SubscribeEvent(ECheat.SET_HI_SCORE, OnCheatSetHiScore);
+        CheatManager.Instance.SubscribeEvent(ECheat.RESET_HI_SCORE, OnCheatSetHiScore);
         CheatManager.Instance.SubscribeEvent(ECheat.NEXT_SESSION, OnCheatNextSession);
         CheatManager.Instance.SubscribeEvent(ECheat.PREVIUS_SESSION, OnCheatPreviusSession);
     }
 
-    private float OnCheatNextSession(float ignoreFloat)
+    private void OnCheatNextSession()
     {
         ChangeToNextSession();
-        return (float) getCurrentSession();
     }
 
-    private float OnCheatPreviusSession(float ignoreFloat)
+    private void OnCheatPreviusSession()
     {
         ChangeToPreviusSession();
-        return (float)getCurrentSession();
     }
 
 
-    private float OnCheatSetHiScore(float newHiScore)
+    private void OnCheatSetHiScore()
     {
-        m_HiScore = (int)Mathf.Floor(newHiScore);
-        m_HiScore = m_HiScore > m_Score? m_HiScore : m_Score;
+        m_HiScore = m_Score;
         UpdateScores();
-        return m_HiScore;
     }
 
-    private float OnCheatAddScorePoints(float score)
+    private void OnCheatAddScorePoints()
     {
-        AddScorePoints((int)Mathf.Floor(score), true);
-
-        return score;
+        AddScorePoints(CheatManager.ADD_SCORE_VALUE, true);
     }
 
-    private float OnCheatAddTime(float timeToAddInSeconds)
+    private void OnCheatAddTime()
     {
-        m_Timmer += (int) Mathf.Floor(timeToAddInSeconds);
-        return m_Timmer;
+        m_Timmer += CheatManager.ADD_TIMER_IN_SECENDS;
+        m_HUDManager.UpdateTimmer(m_Timmer);
     }
 }

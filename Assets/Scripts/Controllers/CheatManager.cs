@@ -8,19 +8,19 @@ public enum ECheat {
     GOD_MODE,
     ADD_SCORE,
     ADD_TIME,
-    SET_HI_SCORE,
+    RESET_HI_SCORE,
     NEXT_SESSION,
     PREVIUS_SESSION
 }
 
 public class CheatManager : MonoBehaviour
 {
-    private const float ADD_TIMER_IN_SECENDS = 10f;
-    private const float ADD_SCORE_VALUE = 100.0f;
+    public static int ADD_TIMER_IN_SECENDS = 10;
+    public static int ADD_SCORE_VALUE = 100;
     private const float DELAY_MIN = 0.1f;
     private const float DELAY_MAX = 5.0f;
 
-    private Dictionary<ECheat, Func<float, float>> m_Events = new Dictionary<ECheat, Func<float, float>>();
+    private Dictionary<ECheat, Action> m_Events = new Dictionary<ECheat, Action>();
 
 
     private bool m_GodMode = false;
@@ -92,11 +92,11 @@ public class CheatManager : MonoBehaviour
         }
         GUILayout.EndHorizontal();
         {
-            if (GUILayout.Button("Add Score")) AddScore();
-            if (GUILayout.Button("Add Time")) AddTime();
-            if (GUILayout.Button("Reset Hi-Score")) ResetHiScore();
-            if (GUILayout.Button("Next Session")) NextSession();
-            if (GUILayout.Button("Previous Session")) PreviusSession();
+            if (GUILayout.Button("Add Score")) m_Events[ECheat.ADD_SCORE]?.Invoke();
+            if (GUILayout.Button("Add Time")) m_Events[ECheat.ADD_TIME]?.Invoke();
+            if (GUILayout.Button("Reset Hi-Score")) m_Events[ECheat.RESET_HI_SCORE]?.Invoke();
+            if (GUILayout.Button("Next Session")) m_Events[ECheat.NEXT_SESSION]?.Invoke();
+            if (GUILayout.Button("Previous Session")) m_Events[ECheat.PREVIUS_SESSION]?.Invoke();
         }
         {
             GUILayout.Label("Delay Spaw Ground Enemy Range: ");
@@ -147,42 +147,15 @@ public class CheatManager : MonoBehaviour
         return m_GodMode;
     }
 
-    private void PreviusSession()
-    {
-        InvokeEvent(ECheat.PREVIUS_SESSION, 0);
-    }
 
-    private void NextSession()
-    {
-        InvokeEvent(ECheat.NEXT_SESSION, 0);
-    }
-
-    private void ResetHiScore()
-    {
-        InvokeEvent(ECheat.SET_HI_SCORE, 0);
-    }
-
-    private void AddTime()
-    {
-        InvokeEvent(ECheat.ADD_TIME, ADD_TIMER_IN_SECENDS);
-    }
-
-    private void AddScore()
-    {
-        InvokeEvent(ECheat.ADD_SCORE, ADD_SCORE_VALUE);
-    }
-
-
-    public void SubscribeEvent(ECheat cheatId, Func<float, float> action) 
+    public void SubscribeEvent(ECheat cheatId, Action action) 
     {
         if (m_Events.ContainsKey(cheatId)) m_Events[cheatId] += action;
         else m_Events.Add(cheatId, action);
     }
 
-    private float InvokeEvent(ECheat cheatId, float value)
+    private void InvokeEvent(ECheat cheatId)
     {
-        if (!m_Events.ContainsKey(cheatId)) return value;
-
-        return m_Events[cheatId].Invoke(value);
+        m_Events[cheatId]?.Invoke();
     }
 }
