@@ -92,8 +92,9 @@ public class PlayerController : MonoBehaviour
 
     public void LossLife()
     {
+        if (CheatManager.Instance.InGodMode()) return;
+
         m_Animator.SetTrigger(GameParameters.AnimationPlayer.TRIGGER_DIE);
-        // TODO Jouer music game over
         m_alive = false;
         StartCoroutine(DoDie());
         m_AudioDeath.Play();

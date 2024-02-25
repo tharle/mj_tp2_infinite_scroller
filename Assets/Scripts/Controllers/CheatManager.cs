@@ -142,6 +142,11 @@ public class CheatManager : MonoBehaviour
         m_IsCloseMenuCheat = !m_IsCloseMenuCheat;
     }
 
+    public bool InGodMode()
+    {
+        return m_GodMode;
+    }
+
     private void PreviusSession()
     {
         InvokeEvent(ECheat.PREVIUS_SESSION, 0);
