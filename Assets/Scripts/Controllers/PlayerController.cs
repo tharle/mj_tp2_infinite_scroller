@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -65,8 +64,9 @@ public class PlayerController : MonoBehaviour
             }
             else if(m_IsDoubleJump)
             {
-                m_IsDoubleJump = false;
+                m_IsDoubleJump = CheatManager.Instance.InInfinitJump();
                 m_Animator.SetBool(GameParameters.AnimationPlayer.BOOL_DOUBLE_JUMP, true);
+
             }
 
 

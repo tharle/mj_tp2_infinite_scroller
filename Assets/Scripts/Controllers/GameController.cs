@@ -1,14 +1,14 @@
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private int m_AmountTimeScore = 12;
+    public static int AMOUT_TIME_PER_LEVEL_DEFAULT = 12;
+
     [SerializeField] private TextScore m_ScorePlayerText;
     [SerializeField] AudioSource m_CoinAudio;
     HUDManager m_HUDManager;
+    private int m_AmountTimePerLevel = AMOUT_TIME_PER_LEVEL_DEFAULT;
 
     private Session m_Session = Session.SPRING;
 
@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         m_HUDManager = FindAnyObjectByType<HUDManager>();
-        m_AmountTimmerToNextSession = m_AmountTimeScore * 2;
+        m_AmountTimmerToNextSession = m_AmountTimePerLevel * 2;
         LoadPlayerPrefs();
         UpdateScores();
 
@@ -42,7 +42,6 @@ public class GameController : MonoBehaviour
 
     private void UpdateSession()
     {
-        m_TimmerToNextSession += Time.deltaTime;
         if (m_TimmerToNextSession >= m_AmountTimmerToNextSession)
         {
             m_TimmerToNextSession -= m_AmountTimmerToNextSession;
@@ -92,7 +91,7 @@ public class GameController : MonoBehaviour
 
     public int GetLevel()
     {
-        return (m_Timmer / m_AmountTimeScore) + 1;
+        return (m_Timmer / m_AmountTimePerLevel) + 1;
     }
 
     public Session getCurrentSession()
@@ -193,6 +192,13 @@ public class GameController : MonoBehaviour
         CheatManager.Instance.SubscribeEvent(ECheat.RESET_HI_SCORE, OnCheatSetHiScore);
         CheatManager.Instance.SubscribeEvent(ECheat.NEXT_SESSION, OnCheatNextSession);
         CheatManager.Instance.SubscribeEvent(ECheat.PREVIUS_SESSION, OnCheatPreviusSession);
+        CheatManager.Instance.SubscribeEvent(OnCheatEventAmountTimePerLevel);
+    }
+
+    private int OnCheatEventAmountTimePerLevel(int newAmoutTimePerLevel)
+    {
+        m_AmountTimePerLevel = newAmoutTimePerLevel;
+        return m_AmountTimePerLevel;
     }
 
     private void OnCheatNextSession()
@@ -220,6 +226,7 @@ public class GameController : MonoBehaviour
     private void OnCheatAddTime()
     {
         m_Timmer += CheatManager.ADD_TIMER_IN_SECENDS;
+        m_TimmerToNextSession += CheatManager.ADD_TIMER_IN_SECENDS;
         m_HUDManager.UpdateTimmer(m_Timmer);
     }
 }

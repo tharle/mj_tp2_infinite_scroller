@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - SpawnEnemyGround
+  - SpawnEnemyFly
+  - SpawnEnemyCoin1
+  - SpawnEnemyCoin2
   layers:
   - Default
   - TransparentFX
