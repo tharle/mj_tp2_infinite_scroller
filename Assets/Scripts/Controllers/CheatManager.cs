@@ -4,12 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.PlayerSettings.SplashScreen;
 
+public enum ECheat {
+    GOD_MODE,
+    ADD_SCORE,
+    ADD_TIME,
+    SET_HI_SCORE,
+    NEXT_SESSION,
+    PREVIUS_SESSION
+}
+
 public class CheatManager : MonoBehaviour
 {
+    private const float ADD_TIMER_IN_SECENDS = 10f;
+    private const float ADD_SCORE_VALUE = 100.0f;
     private const float DELAY_MIN = 0.1f;
     private const float DELAY_MAX = 5.0f;
 
-    private bool m_IsCloseMenuCheat = false;
+    private Dictionary<ECheat, Func<float, float>> m_Events = new Dictionary<ECheat, Func<float, float>>();
+
 
     private bool m_GodMode = false;
     float m_SpawnEnemyGroundMin = 0.1f;
@@ -21,6 +33,7 @@ public class CheatManager : MonoBehaviour
     float m_SpawnCoin2Min = 2f;
     float m_SpawnCoin2Max = 2.5f;
 
+    private bool m_IsCloseMenuCheat = false;
     private Rect m_WinRect = new Rect(0, 0, 0, 0);
 
     private static CheatManager m_Instance;
@@ -131,26 +144,40 @@ public class CheatManager : MonoBehaviour
 
     private void PreviusSession()
     {
-        throw new NotImplementedException();
+        InvokeEvent(ECheat.PREVIUS_SESSION, 0);
     }
 
     private void NextSession()
     {
-        throw new NotImplementedException();
+        InvokeEvent(ECheat.NEXT_SESSION, 0);
     }
 
     private void ResetHiScore()
     {
-        throw new NotImplementedException();
+        InvokeEvent(ECheat.SET_HI_SCORE, 0);
     }
 
     private void AddTime()
     {
-        throw new NotImplementedException();
+        InvokeEvent(ECheat.ADD_TIME, ADD_TIMER_IN_SECENDS);
     }
 
     private void AddScore()
     {
-        throw new NotImplementedException();
+        InvokeEvent(ECheat.ADD_SCORE, ADD_SCORE_VALUE);
+    }
+
+
+    public void SubscribeEvent(ECheat cheatId, Func<float, float> action) 
+    {
+        if (m_Events.ContainsKey(cheatId)) m_Events[cheatId] += action;
+        else m_Events.Add(cheatId, action);
+    }
+
+    private float InvokeEvent(ECheat cheatId, float value)
+    {
+        if (!m_Events.ContainsKey(cheatId)) return value;
+
+        return m_Events[cheatId].Invoke(value);
     }
 }

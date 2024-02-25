@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,7 @@ public class GameController : MonoBehaviour
         UpdateScores();
 
         ChangeGameState(GameState.GAME);
+        AddCheats();
     }
 
     private void Update()
@@ -64,6 +66,26 @@ public class GameController : MonoBehaviour
             case Session.SPRING:
             default:
                 m_Session = Session.SUMMER;
+                break;
+        }
+    }
+
+    private void ChangeToPreviusSession()
+    {
+        switch (m_Session)
+        {
+            case Session.SUMMER:
+                m_Session = Session.SPRING;
+                break;
+            case Session.FALL:
+                m_Session = Session.SUMMER;
+                break;
+            case Session.WINTER:
+                m_Session = Session.FALL;
+                break;
+            case Session.SPRING:
+            default:
+                m_Session = Session.WINTER;
                 break;
         }
     }
@@ -161,4 +183,49 @@ public class GameController : MonoBehaviour
         else ChangeGameState(GameState.PAUSE_MENU);
     }
 
+    // ---------------------------------------------
+    // CHEAT EVENT
+    // ---------------------------------------------
+    private void AddCheats()
+    {
+        CheatManager.Instance.SubscribeEvent(ECheat.ADD_SCORE, OnCheatAddScorePoints);
+        CheatManager.Instance.SubscribeEvent(ECheat.ADD_TIME, OnCheatAddTime);
+        CheatManager.Instance.SubscribeEvent(ECheat.SET_HI_SCORE, OnCheatSetHiScore);
+        CheatManager.Instance.SubscribeEvent(ECheat.NEXT_SESSION, OnCheatNextSession);
+        CheatManager.Instance.SubscribeEvent(ECheat.PREVIUS_SESSION, OnCheatPreviusSession);
+    }
+
+    private float OnCheatNextSession(float ignoreFloat)
+    {
+        ChangeToNextSession();
+        return (float) getCurrentSession();
+    }
+
+    private float OnCheatPreviusSession(float ignoreFloat)
+    {
+        ChangeToPreviusSession();
+        return (float)getCurrentSession();
+    }
+
+
+    private float OnCheatSetHiScore(float newHiScore)
+    {
+        m_HiScore = (int)Mathf.Floor(newHiScore);
+        m_HiScore = m_HiScore > m_Score? m_HiScore : m_Score;
+        UpdateScores();
+        return m_HiScore;
+    }
+
+    private float OnCheatAddScorePoints(float score)
+    {
+        AddScorePoints((int)Mathf.Floor(score), true);
+
+        return score;
+    }
+
+    private float OnCheatAddTime(float timeToAddInSeconds)
+    {
+        m_Timmer += (int) Mathf.Floor(timeToAddInSeconds);
+        return m_Timmer;
+    }
 }
