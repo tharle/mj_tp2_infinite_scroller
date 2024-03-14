@@ -35,8 +35,10 @@ public class CheatManager : MonoBehaviour
         get { 
             if (m_Instance == null)
             {
+                #if DEBUG
                 GameObject go = new GameObject("CheatManager");
                 go.AddComponent<CheatManager>();
+                #endif
             }
 
             return m_Instance; 

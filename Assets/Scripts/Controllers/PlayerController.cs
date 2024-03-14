@@ -64,7 +64,11 @@ public class PlayerController : MonoBehaviour
             }
             else if(m_IsDoubleJump)
             {
+                m_IsDoubleJump = false;
+#if DEBUG
                 m_IsDoubleJump = CheatManager.Instance.InInfinitJump();
+#endif
+
                 m_Animator.SetBool(GameParameters.AnimationPlayer.BOOL_DOUBLE_JUMP, true);
 
             }
@@ -92,8 +96,9 @@ public class PlayerController : MonoBehaviour
 
     public void LossLife()
     {
+#if DEBUG
         if (CheatManager.Instance.InGodMode()) return;
-
+#endif
         m_Animator.SetTrigger(GameParameters.AnimationPlayer.TRIGGER_DIE);
         m_alive = false;
         StartCoroutine(DoDie());

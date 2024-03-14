@@ -28,7 +28,9 @@ public class GameController : MonoBehaviour
         UpdateScores();
 
         ChangeGameState(GameState.GAME);
+#if DEBUG
         AddCheats();
+#endif
     }
 
     private void Update()
@@ -185,6 +187,7 @@ public class GameController : MonoBehaviour
     // ---------------------------------------------
     // CHEAT EVENT
     // ---------------------------------------------
+#if DEBUG
     private void AddCheats()
     {
         CheatManager.Instance.SubscribeEvent(ECheat.ADD_SCORE, OnCheatAddScorePoints);
@@ -194,6 +197,7 @@ public class GameController : MonoBehaviour
         CheatManager.Instance.SubscribeEvent(ECheat.PREVIUS_SESSION, OnCheatPreviusSession);
         CheatManager.Instance.SubscribeEvent(OnCheatEventAmountTimePerLevel);
     }
+#endif
 
     private int OnCheatEventAmountTimePerLevel(int newAmoutTimePerLevel)
     {
