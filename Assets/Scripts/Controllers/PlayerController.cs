@@ -4,8 +4,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] private float m_Speed = 10;
-    [SerializeField] private float m_JumpForce = 10;
+    private const float SPEED_INCR_PER_LEVEL = 0.1f;
+    [SerializeField] private float m_Speed = 0.35f;
+    [SerializeField] private float m_JumpForce = 10f;
     private bool m_alive = true;
 
     [SerializeField] private BoxCollider2D m_GroundCheck;
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!m_IsGround && !m_IsDoubleJump) return;
 
-        if (Input.GetKeyDown(GameParameters.InputName.KEY_JUMP))
+        if (IsJumpKeyPressed())
         {
 
             ResetVelocityJump();
@@ -76,20 +77,29 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        m_Animator.SetFloat(GameParameters.AnimationPlayer.FLOAT_VELOCITY_Y, m_Body.velocity.y);
+        m_Animator.SetFloat(GameParameters.AnimationPlayer.FLOAT_VELOCITY_Y, m_Body.linearVelocity.y);
+    }
+
+    private bool IsJumpKeyPressed()
+    {
+        if(Input.GetKeyDown(GameParameters.InputName.KEY_JUMP) ) return true;
+
+        if(Input.touchCount > 0) return Input.GetTouch(0).phase == TouchPhase.Began;
+        
+        return false;
     }
 
     private void ResetVelocityJump()
     {
-        Vector3 velocity = m_Body.velocity;
+        Vector3 velocity = m_Body.linearVelocity;
         velocity.y = 0;
-        m_Body.velocity = velocity;
+        m_Body.linearVelocity = velocity;
     }
 
     private void Move()
     {
 
-        float speed = m_Speed * m_Controller.GetLevel() / 2;
+        float speed = m_Speed + (m_Controller.GetLevel() * SPEED_INCR_PER_LEVEL);
         Vector3 displacement  = Vector3.right * speed * Time.deltaTime ;
         transform.Translate(displacement);
     }

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public static int AMOUT_TIME_PER_LEVEL_DEFAULT = 12;
+    public static int AMOUT_TIME_PER_LEVEL_DEFAULT = 8;
 
     [SerializeField] private TextScore m_ScorePlayerText;
     [SerializeField] AudioSource m_CoinAudio;
@@ -145,6 +145,7 @@ public class GameController : MonoBehaviour
     private void UpdateTimmer()
     {
         m_ElapseTimmer += Time.deltaTime;
+        m_TimmerToNextSession +=  Time.deltaTime;
         if (m_ElapseTimmer > 1) // change le timmer chaque 1s
         {
             m_ElapseTimmer -= 1;
